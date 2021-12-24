@@ -1,0 +1,76 @@
+{%load static %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+
+<title>Create Departments</title>
+    
+    </head>
+    <body>
+        <div class="sidenav">
+            <ul>
+                <li><a href="{% url 'new' %}">Create Account</a></li>
+                <li><a href="{% url 'expensetype' %}">Create Expense Type</a></li>
+                <li><a href="{% url 'dept' %}">Create Departments</a></li>
+                
+                <li><a href="">Expense</a>
+                   <ul>
+                       <li><a href="{% url 'itemexpense' %}">Item Expenses</a></li>
+                       <li><a href="{% url 'hrexpense' %}">HR Expenses</a></li>
+                       <li><a href="{% url 'miscexpense' %}">Misc Expenses</a></li>
+                   </ul>
+                </li>
+                <li><a href="{% url 'table' %}">Table</a></li>
+
+                <li><a href="{% url 'index' %}">Logout</a></li>
+                </ul>
+            
+        
+        </div>
+        <div class="main">
+            <h1>Edit New Department</h1>
+
+        <!--Form-->
+        <div class="body">
+            <form action="/deptupdate/{{ed3.id}}" method="POST" class="form-horizontal">
+                {% csrf_token%}
+            
+        <div class="row clearfix">
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                <label for="name">Department Name</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                <div class="form-group">
+                    <div class="form-line">
+                        <input name="name" type="text"  id="name" value="{{ed3.name}}" class="form-control"
+                            placeholder="Department Name">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+                <label for="description"> Description</label>
+            </div>
+            <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+                <div class="form-group">
+                    <div class="form-line">
+                        <input name="description" type="text"  id="description" value="{{ed3.description}}" class="form-control"
+                            placeholder=" description">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br>
+
+        <button type="submit" > Update</button>
+
+      
+        </div>
+    </body>
+</html>

@@ -1,0 +1,185 @@
+
+{%load static %}
+<!DOCTYPE html>
+<html>
+    <head> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--Css-->
+        <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+        <!--Bootstrap-->
+        <link href="{% static 'assets/css/bootstrap.css' %}" rel="stylesheet">
+        <!--Exports-->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.3/b-2.1.1/b-html5-2.1.1/b-print-2.1.1/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.11.3/b-2.1.1/b-html5-2.1.1/b-print-2.1.1/datatables.min.js"></script>
+
+
+<title>Table</title>
+</head>
+<body>
+    <div class="sidenav">
+        <ul>
+            <li><a href="{% url 'new' %}">Create Account</a></li>
+            <li><a href="{% url 'expensetype' %}">Create Expense Type</a></li>
+            <li><a href="{% url 'dept' %}">Create Departments</a></li>
+            
+            <li><a href="">Expense</a>
+               <ul>
+                   <li><a href="{% url 'itemexpense' %}">Item Expenses</a></li>
+                   <li><a href="{% url 'hrexpense' %}">HR Expenses</a></li>
+                   <li><a href="{% url 'miscexpense' %}">Misc Expenses</a></li>
+               </ul>
+            </li>
+            <li><a href="{% url 'table' %}">Table</a></li>
+
+            <li><a href="{% url 'index' %}">Logout</a></li>
+
+            </ul>
+       
+    
+    </div>
+    <div class="main">
+
+    <h1>Table</h1>
+
+    <!--table-->
+    <div class="body">
+        <form action="/table" method="POST" class="form-horizontal">
+            {% csrf_token%}
+        
+    <div class="row clearfix">
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+            <label for="et">Expense Tpe</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+            <div class="form-group">
+                <div class="form-line">
+                    <input name="et" type="text"  id="et" class="form-control"
+                        placeholder="Enter Expense Type">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+            <label for="an"> Account Number</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+            <div class="form-group">
+                <div class="form-line">
+                    <input name="an" type="text"  id="an" class="form-control"
+                        placeholder="Enter Account Number">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+            <label for="d"> Department</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+            <div class="form-group">
+                <div class="form-line">
+                    <input name="d" type="text"  id="d" class="form-control"
+                        placeholder="enter Department">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+            <label for="it"> Item Name</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+            <div class="form-group">
+                <div class="form-line">
+                    <input name="it" type="text"  id="it" class="form-control"
+                        placeholder=" Enter Item Name">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+            <label for="fd"> From Date</label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+            <div class="form-group">
+                <div class="form-line">
+                    <input name="fd" type="text"  id="fd" class="form-control"
+                        placeholder="Enter From Date">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-2 col-md-2 col-sm-4 col-xs-5 form-control-label">
+            <label for="td"> To date </label>
+        </div>
+        <div class="col-lg-10 col-md-10 col-sm-8 col-xs-7">
+            <div class="form-group">
+                <div class="form-line">
+                    <input name="td" type="text"  id="td" class="form-control"
+                        placeholder=" Enter To Date">
+                </div>
+            </div>
+        </div>
+    </div>
+  
+
+
+   <br><center>
+    <button type="submit" class="btn btn-success m-t-15 waves-effect"> Generate Report</button>
+<br><br>
+
+<div class="container">
+    <div class="card col-8">
+
+    <table class="table" id="mytable">
+        <thead>
+        <tr>
+            <th>Expense Type</th>
+            <th>Account number</th>
+            <th>Department</th>
+            <th>Item Name</th>
+            <th>From Date</th>
+            <th>To Date</th>
+
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+            {% for i in var8 %}
+            <td>{{i.et}}</td>
+            <td>{{i.an}}</td>
+            <td>{{i.d}}</td>
+            <td>{{i.it}}</td>
+            <td>{{i.fd}}</td>
+            <td>{{i.td}}</td>
+
+
+        </tr>
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+    <button onclick="window.print()">Print Page</button>
+    </div>
+</div>
+</body>
+
+<script>
+$(document).ready(function() {
+    $('#mytable').dataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+</script>
+</html>

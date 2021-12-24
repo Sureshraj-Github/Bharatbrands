@@ -1,0 +1,32 @@
+{%load static %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registration</title>
+    </head>
+    <body>
+        <h1>Welcome To Registration Page..!</h1>
+
+        <!--Form Register-->
+        <form action="/register" method="POST" id="register" class="input-group">
+           {% csrf_token %}
+            <label>Name:</label>
+            <input type="text" name="nameid" class="input-field" placeholder="Enter Your Name"required><br><br>
+
+            <label>Email:</label>
+            <input type="email" name="emailid" class="input-field" placeholder="Enter Your Mail id"required><br><br>
+
+            <label>Phone:</label>
+            <input type="text"id="phone"name="phone" class="input-field"placeholder="Enter Your Mobile Number"required><br><br>
+
+            <label>User Name:</label>
+            <input type="text" name="userid" class="input-field" placeholder="Enter Your Name"required><br><br>
+            
+            <label>Password:</label>
+            <input type="password" name="enterpassword" class="input-field" placeholder="Enter Your Password"required><br><br>
+
+           <button type="submit" >Register</button></a>            
+
+        </form>
+    </body>
+</html>
